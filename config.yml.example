@@ -1,0 +1,8 @@
+name: John Doe
+department: Widget Manufacturing
+position: Head Widget Inspector
+supervisor: Jane Smith
+reviewer:
+reviewer_title: Chief Quality Controll Officer
+# yymm
+period_start: "0101"

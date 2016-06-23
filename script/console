@@ -1,0 +1,3 @@
+#!/bin/bash
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+irb -I "$script_dir/.." -r "planning_worksheet.rb" -r "console_support.rb"
