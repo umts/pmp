@@ -1,21 +1,26 @@
 module PMP
   class Settings
 
-    ATTRS = %i(name department position supervisor reviewer reviewer_title).freeze
-    attr_accessor(*ATTRS)
+    ATTRS = %i(name
+               department
+               position
+               supervisor
+               reviewer
+               reviewer_title
+               period_start).freeze
+    attr_accessor(*ATTRS - [:period_start])
 
-    def init(settings_file)
+    def initialize(settings_file)
       settings_file.rewind
-      data = YAML.load(settings.read)
+      data = YAML.load(settings_file.read)
       ATTRS.each do |attr|
-        instance_variable_set(attr, data[attr.to_s])
+        instance_variable_set("@#{attr}", data[attr.to_s])
       end
-      @period_start = data['period_start']
     end
 
     def start_date(year)
-      month = @period_start[0,2]
-      day = @period_start[2,2]
+      month = @period_start[0,2].to_i
+      day = @period_start[2,2].to_i
       Date.new(year.to_i, month, day)
     end
 
@@ -24,7 +29,7 @@ module PMP
     end
 
     def period(year)
-      (start_date..end_date)
+      (start_date(year)..end_date(year))
     end
   end
 end
