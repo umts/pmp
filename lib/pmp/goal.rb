@@ -4,6 +4,7 @@ module PMP
                           criteria
                           employee_review
                           supervisor_review).freeze
+
     attr_accessor :due_date, :employee_review_date, :supervisor_review_date
     attr_writer(*FORMATTED_FIELDS)
 
