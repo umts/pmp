@@ -1,3 +1,5 @@
+require 'kramdown'
+
 module PMP
   class PlanningWorkSheet
     include Prawn::View
@@ -25,7 +27,7 @@ module PMP
     def render_document
       font 'Times-Roman'
       front_matter
-      @goals.each_with_index do |goal, n|
+      @goals.each.with_index(1) do |goal, n|
         goal_block(n, goal)
       end
       header_and_footer
@@ -38,6 +40,9 @@ module PMP
                        width: bounds.width - @margins[1] - @margins[3], height: 20.pt) do
             text "PERFORMANCE PLANNING WORKSHEET",
               size: 14.pt, style: :bold, align: :center, valign: :center
+            transparent(0.1) do
+              fill_rectangle(bounds.top_left, bounds.width, bounds.height)
+            end
             stroke_bounds
           end
           text_box "University of Massachusetts SEIU Performance Management Program",
@@ -89,13 +94,15 @@ module PMP
 
       bounding_box([0, cursor], width: bounds.right) do
         move_down 4.pt
-        formatted_text [
-          {text: 'Every employee is expected to work on a '},
-          {text: 'minimum of three goals and/or work priorities ', styles: [:bold]},
-          {text: 'and a '},
-          {text: 'maximum of eight goals and or work priorities ', styles: [:bold]},
-          {text: 'during the review period.'}
-        ]
+        bounding_box([4.pt, cursor], width: bounds.right - 4.pt) do
+          formatted_text [
+            {text: 'Every employee is expected to work on a '},
+            {text: 'minimum of three goals and/or work priorities ', styles: [:bold]},
+            {text: 'and a '},
+            {text: 'maximum of eight goals and or work priorities ', styles: [:bold]},
+            {text: 'during the review period.'}
+          ]
+        end
         move_down 4.pt
         stroke_bounds
       end
@@ -109,7 +116,82 @@ module PMP
     end
 
     def goal_block(n, goal)
+      box_pad = 4.pt
 
+      bounding_box([0, cursor], width: bounds.right) do
+        bounding_box([0, bounds.top], width: bounds.right / 2) do
+          bounding_box([box_pad, bounds.top - box_pad], width: (bounds.right - box_pad)) do
+            text "#{n}. GOAL/WORK PRIORITY", style: :bold
+            format_markdown(goal.description)
+          end
+        end
+
+        bounding_box([bounds.right / 2, bounds.top], width: (bounds.right / 2) - box_pad) do
+          move_down box_pad
+          indent box_pad do
+            text 'SUCCESS CRITERIA:', style: :bold
+            move_down 12.pt
+            format_markdown(goal.criteria)
+          end
+        end
+
+        stroke do
+          transparent(0.1) do
+            fill_rectangle(bounds.top_left, bounds.width / 2, bounds.height)
+          end
+        end
+        line [bounds.right / 2, bounds.top], [bounds.right / 2, 0]
+        stroke_bounds
+        float do
+          move_up 16.pt
+          indent box_pad do
+            text "DUE DATE: #{goal.due_date.nil? ? 'ongoing' : goal.due_date.strftime('%B %-d, %Y')}"
+          end
+        end
+      end
+
+      bounding_box([0, cursor], width: bounds.right) do
+        move_down box_pad
+        indent box_pad do
+          bounding_box([0, cursor], width: bounds.right - box_pad) do
+            formatted_text [
+              {text: 'Employee Review Comments', styles: [:bold]},
+              {text: Prawn::Text::NBSP * 28},
+              {text: 'Date: ', styles: [:bold]},
+              {text: goal.employee_review_date.to_s}
+            ]
+            move_down 6.pt
+            format_markdown(goal.employee_review)
+          end
+        end
+        stroke_bounds
+      end
+
+      bounding_box([0, cursor], width: bounds.right) do
+        move_down box_pad
+        indent box_pad do
+          bounding_box([0, cursor], width: bounds.right - box_pad) do
+            formatted_text [
+              {text: 'Supervisor Review Comments', styles: [:bold]},
+              {text: Prawn::Text::NBSP * 26},
+              {text: 'Date: ', styles: [:bold]},
+              {text: goal.supervisor_review_date.to_s}
+            ]
+            move_down 6.pt
+            format_markdown(goal.supervisor_review)
+          end
+        end
+        stroke_bounds
+      end
+
+      move_down 12.pt
+    end
+
+    private
+
+    def format_markdown(markdown)
+      document = Kramdown::Document.new(markdown, pdf: self)
+      document.to_pdf_part
     end
   end
 end
