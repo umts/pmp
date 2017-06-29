@@ -4,3 +4,9 @@ def pw
   p.render_document
   p.save_as('out/example_planning_worksheet.pdf')
 end
+
+def goals
+  File.open('goals.yml.example') do |f|
+    YAML.load_stream(f).map{|doc| PMP::Goal.from_hash(doc)}
+  end
+end
