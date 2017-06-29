@@ -29,6 +29,7 @@ module PMP
       front_matter
       @goals.each.with_index(1) do |goal, n|
         goal_block(n, goal)
+        start_new_page unless n == @goals.count
       end
       header_and_footer
     end
@@ -93,17 +94,17 @@ module PMP
       move_down 6.pt
 
       bounding_box([0, cursor], width: bounds.right) do
-        move_down 4.pt
-        bounding_box([4.pt, cursor], width: bounds.right - 4.pt) do
-          formatted_text [
-            {text: 'Every employee is expected to work on a '},
-            {text: 'minimum of three goals and/or work priorities ', styles: [:bold]},
-            {text: 'and a '},
-            {text: 'maximum of eight goals and or work priorities ', styles: [:bold]},
-            {text: 'during the review period.'}
-          ]
+        pad 4.pt do
+          bounding_box([4.pt, cursor], width: bounds.right - 4.pt) do
+            formatted_text [
+              {text: 'Every employee is expected to work on a '},
+              {text: 'minimum of three goals and/or work priorities ', styles: [:bold]},
+              {text: 'and a '},
+              {text: 'maximum of eight goals and or work priorities ', styles: [:bold]},
+              {text: 'during the review period.'}
+            ]
+          end
         end
-        move_down 4.pt
         stroke_bounds
       end
       move_down 6.pt
@@ -135,13 +136,12 @@ module PMP
           end
         end
 
-        stroke do
-          transparent(0.1) do
-            fill_rectangle(bounds.top_left, bounds.width / 2, bounds.height)
-          end
+        transparent(0.1) do
+          fill_rectangle(bounds.top_left, bounds.width / 2, bounds.height)
         end
         line [bounds.right / 2, bounds.top], [bounds.right / 2, 0]
         stroke_bounds
+
         float do
           move_up 16.pt
           indent box_pad do
@@ -183,8 +183,6 @@ module PMP
         end
         stroke_bounds
       end
-
-      move_down 12.pt
     end
 
     private
