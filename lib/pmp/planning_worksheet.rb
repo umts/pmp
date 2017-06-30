@@ -34,6 +34,8 @@ module PMP
       header_and_footer
     end
 
+    private
+
     def header_and_footer
       repeat(:all) do
         canvas do
@@ -184,8 +186,6 @@ module PMP
         stroke_bounds
       end
     end
-
-    private
 
     def format_markdown(markdown)
       document = Kramdown::Document.new(markdown, pdf: self)
