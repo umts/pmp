@@ -1,7 +1,7 @@
 require 'kramdown'
 
 module PMP
-  class PlanningWorkSheet
+  class PlanningWorksheet
     include Prawn::View
 
     attr_accessor :margins
