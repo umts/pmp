@@ -1,6 +1,8 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
+source 'https://rubygems.org'
+
+gem 'kramdown'
 gem 'prawn'
 gem 'prawn-table'
-gem 'kramdown'
 gem 'pry-byebug'

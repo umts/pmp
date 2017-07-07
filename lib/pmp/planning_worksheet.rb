@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'kramdown'
 
 module PMP
@@ -18,10 +20,8 @@ module PMP
     end
 
     def document
-      @document ||= Prawn::Document.new({
-        margin: @margins,
-        default_leading: 8.pt
-      })
+      @document ||= Prawn::Document.new(margin: @margins,
+                                        default_leading: 8.pt)
     end
 
     def render_document
@@ -41,49 +41,49 @@ module PMP
         canvas do
           bounding_box([bounds.left + @margins[3], bounds.top - @header],
                        width: bounds.width - @margins[1] - @margins[3], height: 20.pt) do
-            text "PERFORMANCE PLANNING WORKSHEET",
-              size: 14.pt, style: :bold, align: :center, valign: :center
+            text 'PERFORMANCE PLANNING WORKSHEET',
+                 size: 14.pt, style: :bold, align: :center, valign: :center
             transparent(0.1) do
               fill_rectangle(bounds.top_left, bounds.width, bounds.height)
             end
             stroke_bounds
           end
-          text_box "University of Massachusetts SEIU Performance Management Program",
-            at: [0, @footer], align: :center
+          text_box 'University of Massachusetts SEIU Performance Management Program',
+                   at: [0, @footer], align: :center
         end
       end
     end
 
     def front_matter
       formatted_text [
-        {text: 'EMPLOYEE NAME:', styles: [:bold]},
-        {text: @name.center(20), styles: [:underline]},
-        {text: 'POSITION:', styles: [:bold]},
-        {text: @position.center(30), styles: [:underline]},
-        {text: Prawn::Text::NBSP}
+        { text: 'EMPLOYEE NAME:', styles: [:bold] },
+        { text: @name.center(20), styles: [:underline] },
+        { text: 'POSITION:', styles: [:bold] },
+        { text: @position.center(30), styles: [:underline] },
+        { text: Prawn::Text::NBSP }
       ]
       move_down 6.pt
 
       formatted_text [
-        {text: 'PMP Handbook on Web  ', styles: [:italic]},
-        {text: 'http://www.umass.edu/humres/PMPHand.pdf',
-         color: '0000FF',
-         link: 'http://www.umass.edu/humres/PMPGuide.pdf'}
+        { text: 'PMP Handbook on Web  ', styles: [:italic] },
+        { text: 'http://www.umass.edu/humres/PMPHand.pdf',
+          color: '0000FF',
+          link: 'http://www.umass.edu/humres/PMPGuide.pdf' }
       ]
       formatted_text [
-        {text: 'PMP Guidelines on Web  ', styles: [:italic]},
-        {text: 'http://www.umass.edu/humres/PMPGuide.pdf',
-         color: '0000FF',
-         link: 'http://www.umass.edu/humres/PMPGuide.pdf'}
+        { text: 'PMP Guidelines on Web  ', styles: [:italic] },
+        { text: 'http://www.umass.edu/humres/PMPGuide.pdf',
+          color: '0000FF',
+          link: 'http://www.umass.edu/humres/PMPGuide.pdf' }
       ]
       move_down 6.pt
 
       formatted_text [
-        {text: 'REVIEW PERIOD: From: '},
-        {text: @start_date.to_s.center(15), styles: [:underline]},
-        {text: 'To: '},
-        {text: @end_date.to_s.center(15), styles: [:underline]},
-        {text: Prawn::Text::NBSP}
+        { text: 'REVIEW PERIOD: From: ' },
+        { text: @start_date.to_s.center(15), styles: [:underline] },
+        { text: 'To: ' },
+        { text: @end_date.to_s.center(15), styles: [:underline] },
+        { text: Prawn::Text::NBSP }
       ]
       move_down 6.pt
 
@@ -92,18 +92,18 @@ module PMP
         success criteria and, when completed, to comment on the end
         results.
         INST
-        styles: [:bold] }], align: :center
+                        styles: [:bold] }], align: :center
       move_down 6.pt
 
       bounding_box([0, cursor], width: bounds.right) do
         pad 4.pt do
           bounding_box([4.pt, cursor], width: bounds.right - 4.pt) do
             formatted_text [
-              {text: 'Every employee is expected to work on a '},
-              {text: 'minimum of three goals and/or work priorities ', styles: [:bold]},
-              {text: 'and a '},
-              {text: 'maximum of eight goals and or work priorities ', styles: [:bold]},
-              {text: 'during the review period.'}
+              { text: 'Every employee is expected to work on a ' },
+              { text: 'minimum of three goals and/or work priorities ', styles: [:bold] },
+              { text: 'and a ' },
+              { text: 'maximum of eight goals and or work priorities ', styles: [:bold] },
+              { text: 'during the review period.' }
             ]
           end
         end
@@ -111,10 +111,10 @@ module PMP
       end
       move_down 6.pt
 
-      text "NOTE: Attach the Performance Planning Worksheet to the annual review form."
+      text 'NOTE: Attach the Performance Planning Worksheet to the annual review form.'
       formatted_text [
-        {text: 'Make additional copies if needed. ', styles: [:bold, :italic]},
-        {text: 'For Electronic Users: Please adjust box sizes as data is entered.'}
+        { text: 'Make additional copies if needed. ', styles: %i[bold italic] },
+        { text: 'For Electronic Users: Please adjust box sizes as data is entered.' }
       ]
     end
 
@@ -157,10 +157,10 @@ module PMP
         indent box_pad do
           bounding_box([0, cursor], width: bounds.right - box_pad) do
             formatted_text [
-              {text: 'Employee Review Comments', styles: [:bold]},
-              {text: Prawn::Text::NBSP * 28},
-              {text: 'Date: ', styles: [:bold]},
-              {text: goal.employee_review_date.to_s}
+              { text: 'Employee Review Comments', styles: [:bold] },
+              { text: Prawn::Text::NBSP * 28 },
+              { text: 'Date: ', styles: [:bold] },
+              { text: goal.employee_review_date.to_s }
             ]
             move_down 6.pt
             format_markdown(goal.employee_review)
@@ -174,10 +174,10 @@ module PMP
         indent box_pad do
           bounding_box([0, cursor], width: bounds.right - box_pad) do
             formatted_text [
-              {text: 'Supervisor Review Comments', styles: [:bold]},
-              {text: Prawn::Text::NBSP * 26},
-              {text: 'Date: ', styles: [:bold]},
-              {text: goal.supervisor_review_date.to_s}
+              { text: 'Supervisor Review Comments', styles: [:bold] },
+              { text: Prawn::Text::NBSP * 26 },
+              { text: 'Date: ', styles: [:bold] },
+              { text: goal.supervisor_review_date.to_s }
             ]
             move_down 6.pt
             format_markdown(goal.supervisor_review)

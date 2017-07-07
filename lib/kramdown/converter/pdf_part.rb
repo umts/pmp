@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Kramdown
   module Converter
     class PdfPart < Pdf
       def initialize(root, options)
         super
-        unless options.has_key? :pdf
+        unless options.key? :pdf
           warn 'Options is missing a :pdf value. Rendering will fail.'
         end
       end
@@ -17,7 +19,7 @@ module Kramdown
         inner(root, root_options(root, opts))
       end
 
-      def setup_document(root)
+      def setup_document(_root)
         doc = @options.fetch(:pdf)
         doc.extend(PrawnDocumentExtension)
         doc.converter = self

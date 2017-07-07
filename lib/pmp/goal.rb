@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module PMP
   class Goal
-    TEXT_FIELDS = %i[description criteria employee_review supervisor_review]
-    DATE_FIELDS = %i[due_date employee_review_date supervisor_review_date]
+    TEXT_FIELDS = %i[description criteria employee_review supervisor_review].freeze
+    DATE_FIELDS = %i[due_date employee_review_date supervisor_review_date].freeze
     FIELDS = TEXT_FIELDS + DATE_FIELDS
 
     attr_accessor(*TEXT_FIELDS)
@@ -12,9 +14,9 @@ module PMP
     end
 
     DATE_FIELDS.each do |field|
-      define_method :"#{field}=" do |value|                   #def due_date=(value)
-        instance_variable_set(:"@#{field}", date_cast(value)) #  @due_date = date_cast(value)
-      end                                                     #end
+      define_method :"#{field}=" do |value|                   # def due_date=(value)
+        instance_variable_set(:"@#{field}", date_cast(value)) #   @due_date = date_cast(value)
+      end                                                     # end
     end
 
     def from_hash(document)
