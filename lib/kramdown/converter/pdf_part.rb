@@ -5,9 +5,8 @@ module Kramdown
     class PdfPart < Pdf
       def initialize(root, options)
         super
-        unless options.key? :pdf
-          warn 'Options is missing a :pdf value. Rendering will fail.'
-        end
+        return if options.key? :pdf
+        warn 'Options is missing a :pdf value. Rendering will fail.'
       end
 
       def convert(el, opts = {})

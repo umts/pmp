@@ -40,7 +40,8 @@ module PMP
       repeat(:all) do
         canvas do
           bounding_box([bounds.left + @margins[3], bounds.top - @header],
-                       width: bounds.width - @margins[1] - @margins[3], height: 20.pt) do
+                       width: bounds.width - @margins[1] - @margins[3],
+                       height: 20.pt) do
             text 'PERFORMANCE PLANNING WORKSHEET',
                  size: 14.pt, style: :bold, align: :center, valign: :center
             transparent(0.1) do
@@ -48,8 +49,9 @@ module PMP
             end
             stroke_bounds
           end
-          text_box 'University of Massachusetts SEIU Performance Management Program',
-                   at: [0, @footer], align: :center
+          footer_text = 'University of Massachusetts' \
+                        ' SEIU Performance Management Program'
+          text_box footer_text, at: [0, @footer], align: :center
         end
       end
     end
@@ -100,9 +102,11 @@ module PMP
           bounding_box([4.pt, cursor], width: bounds.right - 4.pt) do
             formatted_text [
               { text: 'Every employee is expected to work on a ' },
-              { text: 'minimum of three goals and/or work priorities ', styles: [:bold] },
+              { text: 'minimum of three goals and/or work priorities ',
+                styles: [:bold] },
               { text: 'and a ' },
-              { text: 'maximum of eight goals and or work priorities ', styles: [:bold] },
+              { text: 'maximum of eight goals and or work priorities ',
+                styles: [:bold] },
               { text: 'during the review period.' }
             ]
           end
@@ -111,10 +115,13 @@ module PMP
       end
       move_down 6.pt
 
-      text 'NOTE: Attach the Performance Planning Worksheet to the annual review form.'
+      note = 'NOTE: Attach the Performance Planning Worksheet' \
+             ' text to the annual review form.'
+      text note
       formatted_text [
         { text: 'Make additional copies if needed. ', styles: %i[bold italic] },
-        { text: 'For Electronic Users: Please adjust box sizes as data is entered.' }
+        { text: 'For Electronic Users:' \
+                ' Please adjust box sizes as data is entered.' }
       ]
     end
 
@@ -123,13 +130,15 @@ module PMP
 
       bounding_box([0, cursor], width: bounds.right) do
         bounding_box([0, bounds.top], width: bounds.right / 2) do
-          bounding_box([box_pad, bounds.top - box_pad], width: (bounds.right - box_pad)) do
+          bounding_box([box_pad, bounds.top - box_pad],
+                       width: (bounds.right - box_pad)) do
             text "#{n}. GOAL/WORK PRIORITY", style: :bold
             format_markdown(goal.description)
           end
         end
 
-        bounding_box([bounds.right / 2, bounds.top], width: (bounds.right / 2) - box_pad) do
+        bounding_box([bounds.right / 2, bounds.top],
+                     width: (bounds.right / 2) - box_pad) do
           move_down box_pad
           indent box_pad do
             text 'SUCCESS CRITERIA:', style: :bold
@@ -147,7 +156,12 @@ module PMP
         float do
           move_up 16.pt
           indent box_pad do
-            text "DUE DATE: #{goal.due_date.nil? ? 'ongoing' : goal.due_date.strftime('%B %-d, %Y')}"
+            due_date = if goal.due_date.nil?
+                         'ongoing'
+                       else
+                         goal.due_date.strftime('%B %-d, %Y')
+                       end
+            text "DUE DATE: #{due_date}"
           end
         end
       end
