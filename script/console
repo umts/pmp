@@ -1,3 +1,32 @@
-#!/bin/bash
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-irb -I "$script_dir/../lib" -r "pmp" -r "console_support"
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler'
+require 'irb'
+require 'irb/completion'
+require 'pathname'
+
+$pmp_lib_dir = Pathname(__dir__).join('../lib')
+$LOAD_PATH.unshift $pmp_lib_dir.to_path
+
+Bundler.require(:default, :development)
+require 'pmp'
+require 'console_support'
+
+def reload!
+  loaded = $pmp_lib_dir.glob('**/*.rb').map { |lib| load lib }.all?
+  Bundler.require(:default, :development)
+  loaded
+end
+
+IRB::ExtendCommandBundle.include ConsoleSupport
+
+$stdout.sync = true
+IRB.setup nil
+IRB.conf.merge!(
+  IRB_NAME: 'dev-training',
+  PROMPT_MODE: :CLASSIC,
+  RC: false
+)
+
+IRB::Irb.new.run(IRB.conf)
