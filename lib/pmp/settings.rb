@@ -2,13 +2,7 @@
 
 module PMP
   class Settings
-    ATTRS = %i[name
-               department
-               position
-               supervisor
-               reviewer
-               reviewer_title
-               period_start].freeze
+    ATTRS = %i[name department position supervisor reviewer reviewer_title period_start].freeze
     attr_accessor(*ATTRS - [:period_start])
 
     def initialize(settings_file)

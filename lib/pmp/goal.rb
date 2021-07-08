@@ -2,10 +2,8 @@
 
 module PMP
   class Goal
-    TEXT_FIELDS = %i[description criteria
-                     employee_review supervisor_review].freeze
-    DATE_FIELDS = %i[due_date employee_review_date
-                     supervisor_review_date].freeze
+    TEXT_FIELDS = %i[description criteria employee_review supervisor_review].freeze
+    DATE_FIELDS = %i[due_date employee_review_date supervisor_review_date].freeze
     FIELDS = TEXT_FIELDS + DATE_FIELDS
 
     attr_accessor(*TEXT_FIELDS)
@@ -41,7 +39,7 @@ module PMP
       when String
         Date.parse(value)
       else
-        raise ArgumentError, "#{field} must be a Date, parsable String, or nil"
+        raise ArgumentError, "must be a Date, parsable String, or nil"
       end
     end
   end

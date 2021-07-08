@@ -6,11 +6,12 @@ module Kramdown
       def initialize(root, options)
         super
         return if options.key? :pdf
+
         warn 'Options is missing a :pdf value. Rendering will fail.'
       end
 
-      def convert(el, opts = {})
-        send(DISPATCHER_RENDER[el.type], el, opts)
+      def convert(element, opts = {})
+        send(DISPATCHER_RENDER[element.type], element, opts)
       end
 
       def render_root(root, opts)
