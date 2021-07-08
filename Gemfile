@@ -10,4 +10,5 @@ gem 'prawn-table'
 
 group :development do
   gem 'pry-byebug'
+  gem 'rubocop'
 end
