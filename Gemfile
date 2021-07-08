@@ -6,4 +6,7 @@ ruby IO.read(File.expand_path('.ruby-version', __dir__)).strip
 gem 'kramdown'
 gem 'prawn'
 gem 'prawn-table'
-gem 'pry-byebug'
+
+group :development do
+  gem 'pry-byebug'
+end
