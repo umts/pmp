@@ -38,12 +38,13 @@ module PMP
         ]
         move_down 6.pt
 
-        formatted_text [{ text: <<-INST.gsub(/\n?  +/, ' '),
+        formatted_text [{ text: <<~INST.gsub(/\n/, ''),
           Use this worksheet to record goals/work priorities, specify the
           success criteria and, when completed, to comment on the end
           results.
-          INST
-                          styles: [:bold] }], align: :center
+        INST
+                          styles: [:bold] }],
+                       align: :center
         move_down 6.pt
 
         bounding_box([0, cursor], width: bounds.right) do

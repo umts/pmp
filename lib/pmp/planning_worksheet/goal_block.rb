@@ -5,14 +5,14 @@ module PMP
     module GoalBlock
       private
 
-      def goal_block(n, goal)
+      def goal_block(number, goal)
         box_pad = 4.pt
 
         bounding_box([0, cursor], width: bounds.right) do
           bounding_box([0, bounds.top], width: bounds.right / 2) do
             bounding_box([box_pad, bounds.top - box_pad],
                          width: (bounds.right - box_pad)) do
-              text "#{n}. GOAL/WORK PRIORITY", style: :bold
+              text "#{number}. GOAL/WORK PRIORITY", style: :bold
               format_markdown(goal.description)
             end
           end

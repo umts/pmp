@@ -34,12 +34,9 @@ module PMP
 
     def date_cast(value)
       case value
-      when Date, nil
-        value
-      when String
-        Date.parse(value)
-      else
-        raise ArgumentError, "must be a Date, parsable String, or nil"
+      when Date, nil then value
+      when String then Date.parse(value)
+      else raise ArgumentError, 'must be a Date, parsable String, or nil'
       end
     end
   end
