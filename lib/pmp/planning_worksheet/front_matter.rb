@@ -14,19 +14,14 @@ module PMP
       end
 
       def goal_expectations
-        bounding_box([0, cursor], width: bounds.right) do
-          pad 4.pt do
-            bounding_box([4.pt, cursor], width: bounds.right - 4.pt) do
-              formatted_text [
-                { text: 'Every employee is expected to work on a ' },
-                { text: 'minimum of three goals and/or work priorities ', styles: [:bold] },
-                { text: 'and a ' },
-                { text: 'maximum of eight goals and or work priorities ', styles: [:bold] },
-                { text: 'during the review period.' }
-              ]
-            end
-          end
-          stroke_bounds
+        boxed_with_padding do
+          formatted_text [
+            { text: 'Every employee is expected to work on a ' },
+            { text: 'minimum of three goals and/or work priorities ', styles: [:bold] },
+            { text: 'and a ' },
+            { text: 'maximum of eight goals and or work priorities ', styles: [:bold] },
+            { text: 'during the review period.' }
+          ]
         end
       end
 

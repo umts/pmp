@@ -4,5 +4,8 @@ AllCops:
     - '**/*.rb'
   NewCops: enable
 
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+
 Style/Documentation:
   Enabled: false

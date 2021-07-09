@@ -46,6 +46,19 @@ module PMP
 
       private
 
+      def box_pad
+        4.pt
+      end
+
+      def boxed_with_padding(&block)
+        bounding_box([0, cursor], width: bounds.right) do
+          pad box_pad do
+            bounding_box [box_pad, cursor], width: bounds.right - box_pad, &block
+          end
+          stroke_bounds
+        end
+      end
+
       def format_markdown(markdown)
         document = Kramdown::Document.new(markdown, pdf: self)
         document.to_pdf_part

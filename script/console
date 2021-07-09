@@ -6,6 +6,7 @@ require 'irb'
 require 'irb/completion'
 require 'pathname'
 
+# rubocop:disable Style/GlobalVars
 $pmp_lib_dir = Pathname(__dir__).join('../lib')
 $LOAD_PATH.unshift $pmp_lib_dir.to_path
 
@@ -18,13 +19,14 @@ def reload!
   Bundler.require(:default, :development)
   loaded
 end
+# rubocop:enable Style/GlobalVars
 
 IRB::ExtendCommandBundle.include ConsoleSupport
 
 $stdout.sync = true
 IRB.setup nil
 IRB.conf.merge!(
-  IRB_NAME: 'dev-training',
+  IRB_NAME: 'pmp',
   PROMPT_MODE: :CLASSIC,
   RC: false
 )
