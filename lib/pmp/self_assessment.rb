@@ -9,40 +9,32 @@ module PMP
 
     def render_document
       font 'Times-Roman'
-      bounding_box([0, cursor], width: bounds.right) do
-        pad box_pad do
-          bounding_box [box_pad, cursor], width: bounds.right - box_pad do
-            text 'Section 3: EMPLOYEE ANNUAL SELF REVIEW', style: :bold, size: 14.pt
-          end
-        end
-        transparent(0.1) { fill_rectangle(bounds.top_left, bounds.width, bounds.height) }
-        stroke_bounds
-      end
+      section_header
       move_down 6.pt
-      text 'Please, type responses in the space below each question. ' \
-           'Electronic users: the space will expand as needed.', align: :center, size: 10.pt
+      instructions
       move_down 6.pt
-
-      indent 0.25.in, 0.25.in do
-        question_text.zip(@answers).each.with_index(1) do |(question, answer), n|
-          text_box "#{n}.", at: [bounds.left, cursor], width: 16.pt
-          indent 16.pt do
-            text question
-            bounding_box [0, cursor], width: bounds.right do
-              move_down box_pad
-              indent(box_pad, box_pad) { text answer }
-              stroke_color 'DDDDDD'
-              stroke_bounds
-            end
-            move_down 12.pt
-          end
-        end
-      end
+      indent(0.25.in, 0.25.in) { questions_and_answers }
       header_and_footer
     end
 
+    private
+
+    def answer_box(answer)
+      bounding_box [0, cursor], width: bounds.right do
+        move_down box_pad
+        indent(box_pad, box_pad) { text answer }
+        stroke_color 'DDDDDD'
+        stroke_bounds
+      end
+    end
+
+    def instructions
+      text 'Please, type responses in the space below each question. ' \
+           'Electronic users: the space will expand as needed.', align: :center, size: 10.pt
+    end
+
     def question_text
-      [<<~Q1, <<~Q2, <<~Q3, <<~Q4, <<~Q5, <<~Q6].map{|q| q.gsub(/\n/, ' ') }
+      [<<~Q1, <<~Q2, <<~Q3, <<~Q4, <<~Q5, <<~Q6].map { |q| q.gsub(/\n/, ' ') }
         Describe the ways your performance met your expectations this evaluation
         period.
       Q1
@@ -64,6 +56,29 @@ module PMP
         What are the areas in which you would like to grow professionally and
         what kind of support, training and/or resources would you need to do so?
       Q6
+    end
+
+    def questions_and_answers
+      question_text.zip(@answers).each.with_index(1) do |(question, answer), n|
+        text_box "#{n}.", at: [bounds.left, cursor], width: 16.pt
+        indent 16.pt do
+          text question
+          answer_box(answer)
+        end
+        move_down 8.pt
+      end
+    end
+
+    def section_header
+      bounding_box([0, cursor], width: bounds.right) do
+        pad box_pad do
+          bounding_box [box_pad, cursor], width: bounds.right - box_pad do
+            text 'Section 3: EMPLOYEE ANNUAL SELF REVIEW', style: :bold, size: 14.pt
+          end
+        end
+        transparent(0.1) { fill_rectangle(bounds.top_left, bounds.width, bounds.height) }
+        stroke_bounds
+      end
     end
   end
 end

@@ -49,7 +49,10 @@ module PMP
 
     def header_and_footer
       repeat :all do
-        canvas { header; footer }
+        canvas do
+          header
+          footer
+        end
       end
     end
   end
