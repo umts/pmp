@@ -16,4 +16,11 @@ module ConsoleSupport
       YAML.load_stream(f).map { |doc| PMP::Goal.from_hash(doc) } * 5
     end
   end
+
+  def sa
+    load 'pmp/self_assessment.rb'
+    s = PMP::SelfAssessment.new(Array.new(6, 'An Answer'))
+    s.render_document
+    s.save_as 'out/example_self_assessment.pdf'
+  end
 end

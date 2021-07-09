@@ -3,12 +3,10 @@
 require 'bundler'
 Bundler.require(:default)
 
-require 'prawn/measurement_extensions'
-
-require 'kramdown/converter/pdf_part'
-
+require 'pmp/document'
 require 'pmp/goal'
 require 'pmp/planning_worksheet'
+require 'pmp/self_assessment'
 require 'pmp/settings'
 
 module PMP; end

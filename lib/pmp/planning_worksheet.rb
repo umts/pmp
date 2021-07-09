@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'kramdown'
 require 'pmp/planning_worksheet/front_matter'
 require 'pmp/planning_worksheet/goal_block'
-require 'pmp/planning_worksheet/header_and_footer'
+require 'pmp/planning_worksheet/header'
 
 module PMP
   module PlanningWorksheet
@@ -11,27 +10,18 @@ module PMP
       Document.new(...)
     end
 
-    class Document
-      include Prawn::View
+    class Document < PMP::Document
       include FrontMatter
       include GoalBlock
-      include HeaderAndFooter
-
-      attr_accessor :margins
+      include Header
 
       def initialize(name, position, date_range, goals = [])
+        super
         @name = name
         @position = position
         @start_date = date_range.first
         @end_date = date_range.last
         @goals = goals
-        @margins = [1.in, 1.in, 1.in, 1.in]
-        @header = 0.5.in
-        @footer = 0.5.in
-      end
-
-      def document
-        @document ||= Prawn::Document.new(margin: @margins, default_leading: 8.pt)
       end
 
       def render_document
@@ -42,26 +32,6 @@ module PMP
           start_new_page unless n == @goals.count
         end
         header_and_footer
-      end
-
-      private
-
-      def box_pad
-        4.pt
-      end
-
-      def boxed_with_padding(&block)
-        bounding_box([0, cursor], width: bounds.right) do
-          pad box_pad do
-            bounding_box [box_pad, cursor], width: bounds.right - box_pad, &block
-          end
-          stroke_bounds
-        end
-      end
-
-      def format_markdown(markdown)
-        document = Kramdown::Document.new(markdown, pdf: self)
-        document.to_pdf_part
       end
     end
   end
