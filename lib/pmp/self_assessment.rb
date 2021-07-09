@@ -8,7 +8,6 @@ module PMP
     end
 
     def render_document
-      font 'Times-Roman'
       section_header
       move_down 6.pt
       instructions

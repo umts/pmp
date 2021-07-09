@@ -25,7 +25,6 @@ module PMP
       end
 
       def render_document
-        font 'Times-Roman'
         front_matter
         @goals.each.with_index(1) do |goal, n|
           goal_block(n, goal)

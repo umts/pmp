@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'pathname'
 require 'prawn'
 require 'prawn/measurement_extensions'
 require 'kramdown'
@@ -14,6 +15,15 @@ module PMP
     def initialize(*_args)
       @margins = Array.new(4, 1.in)
       @header = @footer = 0.5.in
+
+      font_dir = Pathname(__dir__).join('../../fonts')
+      font_families.update('LiberationSerif' => {
+                             normal: font_dir.join('LiberationSerif-Regular.ttf'),
+                             bold: font_dir.join('LiberationSerif-Bold.ttf'),
+                             italic: font_dir.join('LiberationSerif-Italic.ttf'),
+                             bold_italic: font_dir.join('LiberationSerif-BoldItalic.ttf')
+                           })
+      font 'LiberationSerif'
     end
 
     def document
