@@ -11,4 +11,5 @@ gem 'rake'
 group :development do
   gem 'pry-byebug'
   gem 'rubocop'
+  gem 'rubocop-rake'
 end
