@@ -10,11 +10,11 @@ module Kramdown
         warn 'Options is missing a :pdf value. Rendering will fail.'
       end
 
-      def codeblock_options(_el, opts)
+      def codeblock_options(_element, opts)
         { font: 'LiberationMono', color: '880000', bottom_padding: opts[:size] }
       end
 
-      def codespan_options(_el, _opts)
+      def codespan_options(_element, _opts)
         { font: 'LiberationMono', color: '880000' }
       end
 
@@ -22,8 +22,8 @@ module Kramdown
         send(DISPATCHER_RENDER[element.type], element, opts)
       end
 
-      def header_options(el, opts)
-        size = opts[:size] * 1.15**(6 - el.options[:level])
+      def header_options(element, opts)
+        size = opts[:size] * 1.15**(6 - element.options[:level])
         {
           font: 'LiberationSans', styles: (opts[:styles] || []) + [:bold],
           size: size, bottom_padding: opts[:size], top_padding: opts[:size]
