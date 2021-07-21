@@ -16,13 +16,7 @@ module PMP
       @margins = Array.new(4, 1.in)
       @header = @footer = 0.5.in
 
-      font_dir = Pathname(__dir__).join('../../fonts')
-      font_families.update('LiberationSerif' => {
-                             normal: font_dir.join('LiberationSerif-Regular.ttf'),
-                             bold: font_dir.join('LiberationSerif-Bold.ttf'),
-                             italic: font_dir.join('LiberationSerif-Italic.ttf'),
-                             bold_italic: font_dir.join('LiberationSerif-BoldItalic.ttf')
-                           })
+      font_families.update(liberation_fonts)
       font 'LiberationSerif'
     end
 
@@ -64,6 +58,19 @@ module PMP
           footer
         end
       end
+    end
+
+    def liberation_fonts
+      font_dir = Pathname(__dir__).join('../../fonts')
+
+      %w[Mono Sans Serif].map do |family|
+        ["Liberation#{family}", {
+          normal: font_dir.join("Liberation#{family}-Regular.ttf"),
+          bold: font_dir.join("Liberation#{family}-Bold.ttf"),
+          italic: font_dir.join("Liberation#{family}-Italic.ttf"),
+          bold_italic: font_dir.join("Liberation#{family}-BoldItalic.ttf")
+        }]
+      end.to_h
     end
   end
 end
