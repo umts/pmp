@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+##
+# Helper methods that are mixed into the IRB context invoked by
+# +script/console+
 module ConsoleSupport
   def pw
     load 'pmp/planning_worksheet.rb'

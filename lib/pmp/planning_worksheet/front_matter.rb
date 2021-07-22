@@ -2,9 +2,15 @@
 
 module PMP
   module PlanningWorksheet
+    ##
+    # Methods for the "front matter" of the planning worksheet -- everything
+    # before the "goals" -- included in PMP::PlanningWorkSheet::Document
     module FrontMatter
       private
 
+      ##
+      # Main "front matter" method. Calls all of the other methods in this
+      # module in turn.
       def front_matter
         %i[name_and_position guides review_dates ws_instructions
            goal_expectations other_instructions].each do |document_part|

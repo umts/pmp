@@ -9,6 +9,3 @@ AllCops:
 
 Metrics/AbcSize:
   CountRepeatedAttributes: false
-
-Style/Documentation:
-  Enabled: false

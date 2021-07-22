@@ -2,9 +2,15 @@
 
 module PMP
   module PlanningWorksheet
+    ##
+    # Methods for the "goal blocks" of the planning worksheet -- one block
+    # per goal -- included in PMP::PlanningWorkSheet::Document
     module GoalBlock
       private
 
+      ##
+      # Main "goal block" method. Calls all of the other methods in this
+      # module in turn.
       def goal_block(number, goal)
         bounding_box([0, cursor], width: bounds.right) do
           goal_desc(number, goal)

@@ -9,4 +9,4 @@ require 'pmp/planning_worksheet'
 require 'pmp/self_assessment'
 require 'pmp/settings'
 
-module PMP; end
+module PMP; end  # :nodoc:

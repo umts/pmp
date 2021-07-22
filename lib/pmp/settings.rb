@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module PMP
+  ##
+  # "Settings" value object that exposes the values read from the +config.yml+
   class Settings
     ATTRS = %i[name department position supervisor reviewer reviewer_title period_start].freeze
     attr_accessor(*ATTRS - [:period_start])

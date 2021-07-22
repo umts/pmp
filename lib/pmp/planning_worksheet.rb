@@ -5,11 +5,18 @@ require 'pmp/planning_worksheet/goal_block'
 require 'pmp/planning_worksheet/header'
 
 module PMP
+  ##
+  # PMP "planning worksheet" module used to namespace its component
+  # modules, and the actual document.
   module PlanningWorksheet
+    ##
+    # For convenience: allows typing +PMP::PlanningWorksheet.new+
     def self.new(...)
       Document.new(...)
     end
 
+    ##
+    # The actual document class
     class Document < PMP::Document
       include FrontMatter
       include GoalBlock

@@ -2,9 +2,17 @@
 
 module PMP
   module PlanningWorksheet
+    ##
+    # Methods for the header of the planning worksheet; included in
+    # PMP::PlanningWorksheet::Document
     module Header
       private
 
+      ##
+      # Method that produces a header. Note that it doesn't do any positioning;
+      # it is inteneded to be invoked by +PMP::Document#header_and_footer+
+      # which takes care of canvasing it outside the margins and repeating it
+      # on every page.
       def header
         bounding_box header_bounds, header_size do
           text 'PERFORMANCE PLANNING WORKSHEET',

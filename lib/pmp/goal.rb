@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module PMP
+  ##
+  # Value object that wraps up a PMP "goal" probably from goals.yml
   class Goal
     TEXT_FIELDS = %i[description criteria employee_review supervisor_review].freeze
     DATE_FIELDS = %i[due_date employee_review_date supervisor_review_date].freeze
@@ -9,14 +11,18 @@ module PMP
     attr_accessor(*TEXT_FIELDS)
     attr_reader(*DATE_FIELDS)
 
+    ##
+    # Create a new Goal object from a hash containing field keys.
     def self.from_hash(document)
       new.from_hash(document)
     end
 
-    # e.g.
-    # def due_date=(value)
-    #   @due_date = date_cast(value)
-    # end
+    ##
+    # @example
+    #
+    #   def due_date=(value)
+    #     @due_date = date_cast(value)
+    #   end
     DATE_FIELDS.each do |field|
       define_method :"#{field}=" do |value|
         instance_variable_set(:"@#{field}", date_cast(value))

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module PMP
+  ##
+  # PMP self assessment questions. This is currently just a section (Section 3)
+  # in the larger review form.
   class SelfAssessment < Document
     def initialize(answers = [])
       super

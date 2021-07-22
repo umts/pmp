@@ -7,6 +7,13 @@ require 'kramdown'
 require 'kramdown/converter/pdf_part'
 
 module PMP
+  ##
+  # Parent class for the documents produced by this repo. Normalizes shared
+  # settings like:
+  #
+  # * Margins
+  # * Fonts
+  # * Headers and footers
   class Document
     include Prawn::View
 
