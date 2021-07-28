@@ -52,7 +52,7 @@ module PMP
     end
 
     def format_markdown(markdown)
-      document = Kramdown::Document.new(markdown, pdf: self)
+      document = Kramdown::Document.new(markdown.to_s, pdf: self)
       document.to_pdf_part
     end
 
