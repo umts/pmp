@@ -1,18 +1,19 @@
 ---
-description: 'Ensure widget quatity and reliability'
-criteria: |
+description: >
+ Ensure widget quatity and reliability
+criteria: |-
   Widgets will be evaluated based on the following:
-  
+
   *  Uniformity
   *  Sturdiness
   *  General Goodness
 due_date: 2011-01-01
 
-employee_review: |
+employee_review: |-
   I did a very good job at producing widgets this year, 93% of all of my
   widgets met QA standards.
 employee_review_date: 2012-04-14
 
-supervisor_review: |
+supervisor_review: |-
   John is a valuable widget-producer for us.
 supervisor_review_date: 2012-04-28
