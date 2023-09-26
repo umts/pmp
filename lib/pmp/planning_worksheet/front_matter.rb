@@ -12,7 +12,7 @@ module PMP
       # Main "front matter" method. Calls all of the other methods in this
       # module in turn.
       def front_matter
-        %i[name_and_position guides review_dates ws_instructions
+        %i[name_and_position review_dates ws_instructions
            goal_expectations other_instructions].each do |document_part|
           send document_part
           move_down 6.pt
@@ -31,18 +31,6 @@ module PMP
         end
       end
 
-      def guides
-        links = { 'PMP Handbook' => 'PMPHand.pdf', 'PMP Guidelines' => 'PMPGuide.pdf' }
-        links.each do |title, file|
-          formatted_text [
-            { text: "#{title} on Web  ", styles: [:italic] },
-            { text: "http://www.umass.edu/humres/#{file}",
-              color: '0000FF',
-              link: "http://www.umass.edu/humres/#{file}" }
-          ]
-        end
-      end
-
       def name_and_position
         formatted_text [
           { text: 'EMPLOYEE NAME:', styles: [:bold] },
@@ -54,10 +42,9 @@ module PMP
       end
 
       def other_instructions
-        text 'NOTE: Attach the Performance Planning Worksheet text to the annual review form.'
         formatted_text [
-          { text: 'Make additional copies if needed. ', styles: %i[bold italic] },
-          { text: 'For Electronic Users: Please adjust box sizes as data is entered.' }
+          { text: 'NOTE: Attach the Performance Planning Worksheet text to the annual review form. ', styles: [:bold] },
+          { text: 'Make additional copies if needed. ', styles: %i[bold italic] }
         ]
       end
 

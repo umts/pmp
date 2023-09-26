@@ -18,7 +18,6 @@ module PMP
           text 'PERFORMANCE PLANNING WORKSHEET',
                size: 14.pt, style: :bold, align: :center, valign: :center
           transparent(0.1) { fill_rectangle(bounds.top_left, bounds.width, bounds.height) }
-          stroke_bounds
         end
       end
 
