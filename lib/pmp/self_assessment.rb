@@ -36,7 +36,7 @@ module PMP
     end
 
     def question_text
-      [<<~Q1, <<~Q2, <<~Q3, <<~Q4, <<~Q5, <<~Q6].map { |q| q.gsub(/\n/, ' ') }
+      [<<~Q1, <<~Q2, <<~Q3, <<~Q4, <<~Q5, <<~Q6].map { |q| q.gsub("\n", ' ') }
         Describe the ways your performance met your expectations this evaluation
         period.
       Q1

@@ -9,3 +9,9 @@ AllCops:
 
 Metrics/AbcSize:
   CountRepeatedAttributes: false
+
+Metrics/MethodLength:
+  CountAsOne:
+    - array
+    - hash
+    - heredoc

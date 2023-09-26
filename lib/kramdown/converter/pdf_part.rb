@@ -44,10 +44,10 @@ module Kramdown
       ##
       # Copy of the super method with the font changed to a TTF font
       def header_options(element, opts)
-        size = opts[:size] * 1.15**(6 - element.options[:level])
+        size = opts[:size] * (1.15**(6 - element.options[:level]))
         {
           font: 'LiberationSans', styles: (opts[:styles] || []) + [:bold],
-          size: size, bottom_padding: opts[:size], top_padding: opts[:size]
+          size:, bottom_padding: opts[:size], top_padding: opts[:size]
         }
       end
 

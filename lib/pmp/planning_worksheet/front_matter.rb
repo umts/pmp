@@ -59,7 +59,7 @@ module PMP
       end
 
       def ws_instructions
-        formatted_text [{ text: <<~INST.gsub(/\n/, ''), styles: [:bold] }], align: :center
+        formatted_text [{ text: <<~INST.gsub("\n", ''), styles: [:bold] }], align: :center
           Use this worksheet to record goals/work priorities, specify the
           success criteria and, when completed, to comment on the end
           results.

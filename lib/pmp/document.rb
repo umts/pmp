@@ -37,10 +37,10 @@ module PMP
       4.pt
     end
 
-    def boxed_with_padding(&block)
+    def boxed_with_padding(&)
       bounding_box([0, cursor], width: bounds.right) do
         pad box_pad do
-          bounding_box [box_pad, cursor], width: bounds.right - box_pad, &block
+          bounding_box([box_pad, cursor], width: bounds.right - box_pad, &)
         end
         stroke_bounds
       end
@@ -70,14 +70,14 @@ module PMP
     def liberation_fonts
       font_dir = Pathname(__dir__).join('../../fonts')
 
-      %w[Mono Sans Serif].map do |family|
+      %w[Mono Sans Serif].to_h do |family|
         ["Liberation#{family}", {
           normal: font_dir.join("Liberation#{family}-Regular.ttf"),
           bold: font_dir.join("Liberation#{family}-Bold.ttf"),
           italic: font_dir.join("Liberation#{family}-Italic.ttf"),
           bold_italic: font_dir.join("Liberation#{family}-BoldItalic.ttf")
         }]
-      end.to_h
+      end
     end
   end
 end
