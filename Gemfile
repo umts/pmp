@@ -7,6 +7,7 @@ gem 'kramdown'
 gem 'kramdown-converter-pdf'
 gem 'matrix'
 gem 'prawn'
+gem 'prawn-markup'
 gem 'rake'
 
 group :development do

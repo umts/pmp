@@ -12,6 +12,10 @@ GEM
       prawn-table (~> 0.2.2)
     language_server-protocol (3.17.0.3)
     matrix (0.4.2)
+    mini_portile2 (2.8.4)
+    nokogiri (1.15.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
@@ -20,6 +24,10 @@ GEM
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
+    prawn-markup (1.0.0)
+      nokogiri
+      prawn
+      prawn-table
     prawn-table (0.2.2)
       prawn (>= 1.3.0, < 3.0.0)
     racc (1.7.1)
@@ -55,6 +63,7 @@ DEPENDENCIES
   kramdown-converter-pdf
   matrix
   prawn
+  prawn-markup
   rake
   rubocop
   rubocop-rake

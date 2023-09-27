@@ -4,7 +4,6 @@ require 'pathname'
 require 'prawn'
 require 'prawn/measurement_extensions'
 require 'kramdown'
-require 'kramdown/converter/pdf_part'
 
 module PMP
   ##
@@ -52,8 +51,8 @@ module PMP
     end
 
     def format_markdown(markdown)
-      document = Kramdown::Document.new(markdown.to_s, pdf: self)
-      document.to_pdf_part
+      document = Kramdown::Document.new(markdown.to_s)
+      markup(document.to_html)
     end
 
     def header; end
