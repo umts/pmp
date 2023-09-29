@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e -o pipefail
+
+main="docs/pmp-review.pdf"
+replace_page=2
+
+if [ -z "$1" ]; then
+  echo "No self-assessment file provided"
+  exit 1
+fi
+
+if command -v pdftk &> /dev/null; then
+  pdftk M="$main" SA="$1" cat "M$(($replace_page-1))" SA "M$(($replace_page+1))-end" output -
+fi
