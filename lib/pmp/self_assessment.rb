@@ -24,15 +24,14 @@ module PMP
     def answer_box(answer)
       bounding_box [0, cursor], width: bounds.right do
         move_down box_pad
-        indent(box_pad, box_pad) { text answer }
+        indent(box_pad, box_pad) { text answer.gsub("\n", "\n\n") }
         stroke_color 'DDDDDD'
         stroke_bounds
       end
     end
 
     def instructions
-      text 'Please, type responses in the space below each question. ' \
-           'Electronic users: the space will expand as needed.', align: :center, size: 10.pt
+      text 'Please, type responses in the space below each question.', align: :center, size: 10.pt
     end
 
     def question_text
@@ -62,6 +61,7 @@ module PMP
 
     def questions_and_answers
       question_text.zip(@answers).each.with_index(1) do |(question, answer), n|
+        start_new_page if @document.y < 2.in
         text_box "#{n}.", at: [bounds.left, cursor], width: 16.pt
         indent 16.pt do
           text question
