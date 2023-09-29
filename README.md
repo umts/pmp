@@ -64,7 +64,7 @@ in using your `upstream` from above:
 
 ```bash
 git fetch upstream
-git merge upstream/master
+git merge upstream/main
 ```
 
 Recommendations
