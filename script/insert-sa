@@ -11,5 +11,5 @@ if [ -z "$1" ]; then
 fi
 
 if command -v pdftk &> /dev/null; then
-  pdftk M="$main" SA="$1" cat "M$(($replace_page-1))" SA "M$(($replace_page+1))-end" output -
+  pdftk M="$main" SA="$1" cat "M1-$(($replace_page-1))" SA "M$(($replace_page+1))-end" output -
 fi
