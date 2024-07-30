@@ -59,15 +59,19 @@ module PMP
       Q6
     end
 
+    def question_and_answer(number, question, answer)
+      text_box "#{number}.", at: [bounds.left, cursor], width: 16.pt
+      indent 16.pt do
+        text question
+        answer_box(answer)
+      end
+      move_down 8.pt
+    end
+
     def questions_and_answers
       question_text.zip(@answers).each.with_index(1) do |(question, answer), n|
         start_new_page if @document.y < 2.in
-        text_box "#{n}.", at: [bounds.left, cursor], width: 16.pt
-        indent 16.pt do
-          text question
-          answer_box(answer)
-        end
-        move_down 8.pt
+        question_and_answer(n, question, answer)
       end
     end
 
