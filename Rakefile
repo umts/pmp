@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift Pathname(__dir__).join('lib').to_path
 require 'pathname'
+$LOAD_PATH.unshift Pathname(__dir__).join('lib').to_path
+
 require 'pmp'
 
 def output_planning_worksheet(start_year, filename)
