@@ -4,7 +4,6 @@
 require 'bundler'
 require 'irb'
 require 'irb/completion'
-require 'pathname'
 
 # rubocop:disable Style/GlobalVars
 $pmp_lib_dir = Pathname(__dir__).join('../lib')

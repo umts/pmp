@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pathname'
 require 'prawn'
 require 'prawn/measurement_extensions'
 require 'kramdown'
