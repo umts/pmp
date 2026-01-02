@@ -62,7 +62,7 @@ GEM
       bigdecimal (~> 3.1)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
+    unicode-emoji (4.2.0)
 
 PLATFORMS
   arm64-darwin
@@ -79,7 +79,7 @@ DEPENDENCIES
   rubocop-rake
 
 RUBY VERSION
-  ruby 3.4.4p34
+  ruby 4.0.0
 
 BUNDLED WITH
   4.0.3
